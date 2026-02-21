@@ -13,9 +13,11 @@
   <meta property="og:description" content="Simple health calculators for BMI, calories, and macros.">
   <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/">
   <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="HealthKit - Free BMI, Calorie, and Macro Calculators">
   <meta name="twitter:description" content="Simple health calculators for BMI, calories, and macros.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
   <link rel="stylesheet" href="/healthkit/style.css">
   <script type="application/ld+json">
   {
@@ -24,6 +26,65 @@
     "name": "HealthKit",
     "url": "https://devtoolbox.dedyn.io/healthkit/",
     "description": "Free calculators for BMI, daily calorie needs, and macro planning."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "HealthKit Calculators",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "BMI Calculator",
+        "url": "https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calorie Needs Calculator",
+        "url": "https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Macro Calculator",
+        "url": "https://devtoolbox.dedyn.io/healthkit/macro-calculator.html"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are HealthKit calculators free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All HealthKit calculators are free and can be used without signup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to create an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No account is required. You can open each calculator and use it immediately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are these calculators medical advice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Results are educational estimates and not a substitute for professional medical guidance."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -83,6 +144,18 @@
       <section class="panel card" style="margin-top:14px;">
         <h3>Important note</h3>
         <p>These calculators are educational and not medical advice. If you have a condition, are pregnant, or have diet restrictions, consult a licensed clinician.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Health Calculator FAQ</h3>
+        <p><strong>Are these calculators free?</strong><br>Yes, all HealthKit calculators are free and available without signup.</p>
+        <p><strong>Which calculator should I start with?</strong><br>Most users start with calories (TDEE), then use macros to split calories, and BMI as a quick screening metric.</p>
+        <p><strong>Can calculator results replace medical guidance?</strong><br>No. These tools provide estimates and should be combined with advice from a licensed clinician when needed.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Related Tools</h3>
+        <p>Need productivity and planning tools too? Try <a href="/datekit/">DateKit</a> for date math and <a href="/budgetkit/">BudgetKit</a> for budget planning.</p>
       </section>
     </main>
   </div>

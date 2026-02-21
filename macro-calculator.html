@@ -5,17 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Macro Calculator - HealthKit</title>
   <meta name="description" content="Turn your daily calorie target into protein, carbs, and fat grams. Includes balanced, low-carb, and high-carb presets.">
+  <meta name="keywords" content="macro calculator, protein carbs fat calculator, macronutrient calculator, cutting macros, bulking macros">
   <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/macro-calculator.html">
   <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Macro Calculator - HealthKit">
+  <meta property="og:description" content="Convert your daily calorie target into protein, carbs, and fat grams with practical presets.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/macro-calculator.html">
+  <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Macro Calculator - HealthKit">
+  <meta name="twitter:description" content="Convert your daily calorie target into protein, carbs, and fat grams with practical presets.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
   <link rel="stylesheet" href="/healthkit/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HealthKit Macro Calculator",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "Any",
-    "url": "https://devtoolbox.dedyn.io/healthkit/macro-calculator.html"
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HealthKit Macro Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/healthkit/macro-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "HealthKit",
+            "item": "https://devtoolbox.dedyn.io/healthkit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Macro Calculator",
+            "item": "https://devtoolbox.dedyn.io/healthkit/macro-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What macro split should I use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A balanced starting split is 40 percent carbs, 30 percent protein, and 30 percent fat. You can adjust based on goals and preference."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are grams calculated from calories?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Carbs and protein are 4 calories per gram, while fat is 9 calories per gram."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -77,6 +130,13 @@
         </div>
 
         <p class="footnote">Calories per gram: carbs 4, protein 4, fat 9.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Macro Calculator FAQ</h3>
+        <p><strong>How do I pick a macro split?</strong><br>Start with a balanced split, then adjust based on training demands, satiety, and adherence.</p>
+        <p><strong>Should protein stay high during a cut?</strong><br>Many people keep protein relatively high during fat loss to support muscle retention and satiety.</p>
+        <p><strong>Do percentages need to total 100%?</strong><br>Yes. The calculator validates this before converting macro percentages to gram targets.</p>
       </section>
     </main>
   </div>

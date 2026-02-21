@@ -5,17 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calorie Calculator (TDEE) - HealthKit</title>
   <meta name="description" content="Estimate maintenance calories with age, sex, height, weight, and activity level using the Mifflin-St Jeor equation.">
+  <meta name="keywords" content="calorie calculator, tdee calculator, maintenance calories, bmr calculator, mifflin st jeor">
   <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html">
   <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calorie Calculator (TDEE) - HealthKit">
+  <meta property="og:description" content="Estimate BMR and daily calorie needs using the Mifflin-St Jeor equation and activity level.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html">
+  <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calorie Calculator (TDEE) - HealthKit">
+  <meta name="twitter:description" content="Estimate BMR and daily calorie needs using the Mifflin-St Jeor equation and activity level.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
   <link rel="stylesheet" href="/healthkit/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HealthKit Calorie Calculator",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "Any",
-    "url": "https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html"
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HealthKit Calorie Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "HealthKit",
+            "item": "https://devtoolbox.dedyn.io/healthkit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Calorie Calculator",
+            "item": "https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is TDEE?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "TDEE stands for Total Daily Energy Expenditure, which estimates how many calories you burn in a day including activity."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What equation does this calculator use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This calculator uses the Mifflin-St Jeor equation to estimate BMR, then multiplies by activity level to estimate TDEE."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -81,6 +134,13 @@
         </div>
 
         <p class="footnote">A practical range is usually maintenance +/- 250 to 500 kcal depending on your goal.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Calorie Calculator FAQ</h3>
+        <p><strong>What is the difference between BMR and TDEE?</strong><br>BMR estimates calories burned at rest. TDEE adds activity to estimate your full daily energy use.</p>
+        <p><strong>How much should I reduce calories for fat loss?</strong><br>A common starting point is 250 to 500 kcal below maintenance, then adjust based on progress and energy levels.</p>
+        <p><strong>How often should I recalculate?</strong><br>Recalculate whenever your body weight, routine, or activity level changes materially.</p>
       </section>
     </main>
   </div>

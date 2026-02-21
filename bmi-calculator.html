@@ -5,17 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Calculator - HealthKit</title>
   <meta name="description" content="Free BMI calculator with metric and imperial units. See your BMI category and healthy weight range.">
+  <meta name="keywords" content="bmi calculator, body mass index calculator, bmi chart, healthy weight range">
   <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html">
   <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BMI Calculator - HealthKit">
+  <meta property="og:description" content="Calculate BMI with metric or imperial units and get an instant category with healthy range guidance.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html">
+  <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BMI Calculator - HealthKit">
+  <meta name="twitter:description" content="Calculate BMI with metric or imperial units and get an instant category with healthy range guidance.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
   <link rel="stylesheet" href="/healthkit/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HealthKit BMI Calculator",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "Any",
-    "url": "https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html"
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HealthKit BMI Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "HealthKit",
+            "item": "https://devtoolbox.dedyn.io/healthkit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "BMI Calculator",
+            "item": "https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a healthy BMI range?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For adults, a BMI range of 18.5 to 24.9 is commonly used as the healthy reference range."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is BMI enough to measure health?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. BMI is a screening metric and should be considered alongside body composition, activity level, and clinical context."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -73,6 +126,13 @@
         </div>
 
         <p class="footnote">Healthy BMI range is commonly defined as 18.5 to 24.9.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>BMI FAQ</h3>
+        <p><strong>What is BMI?</strong><br>BMI (Body Mass Index) is weight relative to height. It is useful for population screening but not a diagnosis on its own.</p>
+        <p><strong>What is the normal BMI range?</strong><br>For adults, the commonly used healthy range is 18.5 to 24.9.</p>
+        <p><strong>Why might BMI be misleading?</strong><br>Muscle mass, body composition, age, and ethnicity can affect how well BMI reflects personal health risk.</p>
       </section>
     </main>
   </div>
