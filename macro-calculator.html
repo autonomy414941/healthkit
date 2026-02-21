@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macro Calculator - HealthKit</title>
+  <meta name="description" content="Turn your daily calorie target into protein, carbs, and fat grams. Includes balanced, low-carb, and high-carb presets.">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/macro-calculator.html">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/healthkit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HealthKit Macro Calculator",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "url": "https://devtoolbox.dedyn.io/healthkit/macro-calculator.html"
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/healthkit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>HealthKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/healthkit/">Home</a>
+        <a href="/healthkit/bmi-calculator.html">BMI</a>
+        <a href="/healthkit/calorie-calculator.html">Calories</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Macro Calculator</h1>
+        <p>Choose a calorie target and split it into protein, carbohydrate, and fat grams.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="calories">Daily calories</label>
+            <input id="calories" type="number" min="800" max="7000" step="1" value="2200">
+          </div>
+          <div>
+            <label for="preset">Macro split preset</label>
+            <select id="preset">
+              <option value="40-30-30" selected>Balanced (40% carb / 30% protein / 30% fat)</option>
+              <option value="25-40-35">Low carb (25% carb / 40% protein / 35% fat)</option>
+              <option value="50-25-25">High carb (50% carb / 25% protein / 25% fat)</option>
+              <option value="custom">Custom percentages</option>
+            </select>
+          </div>
+          <div>
+            <label for="carbPct">Carbs (%)</label>
+            <input id="carbPct" type="number" min="0" max="100" step="1" value="40">
+          </div>
+          <div>
+            <label for="proteinPct">Protein (%)</label>
+            <input id="proteinPct" type="number" min="0" max="100" step="1" value="30">
+          </div>
+          <div>
+            <label for="fatPct">Fat (%)</label>
+            <input id="fatPct" type="number" min="0" max="100" step="1" value="30">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate Macros</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your result will appear here.</strong>
+        </div>
+
+        <p class="footnote">Calories per gram: carbs 4, protein 4, fat 9.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const caloriesInput = document.getElementById('calories');
+    const presetInput = document.getElementById('preset');
+    const carbInput = document.getElementById('carbPct');
+    const proteinInput = document.getElementById('proteinPct');
+    const fatInput = document.getElementById('fatPct');
+    const result = document.getElementById('result');
+
+    const presets = {
+      '40-30-30': { carb: 40, protein: 30, fat: 30 },
+      '25-40-35': { carb: 25, protein: 40, fat: 35 },
+      '50-25-25': { carb: 50, protein: 25, fat: 25 }
+    };
+
+    function setFromPreset() {
+      const preset = presetInput.value;
+      const custom = preset === 'custom';
+      carbInput.disabled = !custom;
+      proteinInput.disabled = !custom;
+      fatInput.disabled = !custom;
+      if (!custom) {
+        const split = presets[preset];
+        carbInput.value = split.carb;
+        proteinInput.value = split.protein;
+        fatInput.value = split.fat;
+      }
+    }
+
+    function calculateMacros() {
+      const calories = Number(caloriesInput.value);
+      const carbPct = Number(carbInput.value);
+      const proteinPct = Number(proteinInput.value);
+      const fatPct = Number(fatInput.value);
+
+      if (![calories, carbPct, proteinPct, fatPct].every((n) => Number.isFinite(n) && n >= 0)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please provide valid numeric inputs.</strong>';
+        return;
+      }
+
+      const totalPct = carbPct + proteinPct + fatPct;
+      if (Math.abs(totalPct - 100) > 0.001) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Macro percentages must add up to 100%.</strong>';
+        return;
+      }
+
+      const carbCalories = calories * carbPct / 100;
+      const proteinCalories = calories * proteinPct / 100;
+      const fatCalories = calories * fatPct / 100;
+
+      const carbGrams = carbCalories / 4;
+      const proteinGrams = proteinCalories / 4;
+      const fatGrams = fatCalories / 9;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Daily target from ${Math.round(calories)} kcal</strong>
+        <div class="small" style="margin-top:8px;">Carbs: ${Math.round(carbGrams)} g (${Math.round(carbCalories)} kcal)</div>
+        <div class="small">Protein: ${Math.round(proteinGrams)} g (${Math.round(proteinCalories)} kcal)</div>
+        <div class="small">Fat: ${Math.round(fatGrams)} g (${Math.round(fatCalories)} kcal)</div>
+      `;
+    }
+
+    presetInput.addEventListener('change', () => {
+      setFromPreset();
+      calculateMacros();
+    });
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateMacros);
+
+    setFromPreset();
+    calculateMacros();
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator - HealthKit</title>
+  <meta name="description" content="Free BMI calculator with metric and imperial units. See your BMI category and healthy weight range.">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/healthkit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HealthKit BMI Calculator",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "url": "https://devtoolbox.dedyn.io/healthkit/bmi-calculator.html"
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/healthkit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>HealthKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/healthkit/">Home</a>
+        <a href="/healthkit/calorie-calculator.html">Calories</a>
+        <a href="/healthkit/macro-calculator.html">Macros</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>BMI Calculator <span class="badge">Metric + Imperial</span></h1>
+        <p>Body Mass Index is a screening metric that compares weight to height. It is a starting point, not a diagnosis.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="unitSystem">Unit system</label>
+            <select id="unitSystem">
+              <option value="metric" selected>Metric (kg, cm)</option>
+              <option value="imperial">Imperial (lb, ft + in)</option>
+            </select>
+          </div>
+          <div>
+            <label for="weight">Weight</label>
+            <input type="number" id="weight" min="1" step="0.1" value="70">
+          </div>
+          <div>
+            <label for="heightCm">Height (cm)</label>
+            <input type="number" id="heightCm" min="30" step="0.1" value="175">
+          </div>
+          <div id="imperialHeightWrap" style="display:none;">
+            <label for="heightFt">Height (ft)</label>
+            <input type="number" id="heightFt" min="1" step="1" value="5">
+            <label for="heightIn" style="margin-top:8px;">Height (in)</label>
+            <input type="number" id="heightIn" min="0" max="11" step="1" value="9">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate BMI</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your result will appear here.</strong>
+        </div>
+
+        <p class="footnote">Healthy BMI range is commonly defined as 18.5 to 24.9.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const unitSystem = document.getElementById('unitSystem');
+    const weightInput = document.getElementById('weight');
+    const heightCmInput = document.getElementById('heightCm');
+    const heightFtInput = document.getElementById('heightFt');
+    const heightInInput = document.getElementById('heightIn');
+    const imperialWrap = document.getElementById('imperialHeightWrap');
+    const result = document.getElementById('result');
+
+    function bmiCategory(bmi) {
+      if (bmi < 18.5) return 'Underweight';
+      if (bmi < 25) return 'Normal weight';
+      if (bmi < 30) return 'Overweight';
+      return 'Obesity';
+    }
+
+    function updateUnitFields() {
+      const metric = unitSystem.value === 'metric';
+      imperialWrap.style.display = metric ? 'none' : 'block';
+      heightCmInput.parentElement.style.display = metric ? 'block' : 'none';
+      weightInput.previousElementSibling.textContent = metric ? 'Weight (kg)' : 'Weight (lb)';
+    }
+
+    function calculateBmi() {
+      const weightRaw = Number(weightInput.value);
+      if (!Number.isFinite(weightRaw) || weightRaw <= 0) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter a valid weight.</strong>';
+        return;
+      }
+
+      let weightKg;
+      let heightM;
+
+      if (unitSystem.value === 'metric') {
+        const heightCm = Number(heightCmInput.value);
+        if (!Number.isFinite(heightCm) || heightCm <= 0) {
+          result.className = 'result warn';
+          result.innerHTML = '<strong>Please enter a valid height in centimeters.</strong>';
+          return;
+        }
+        weightKg = weightRaw;
+        heightM = heightCm / 100;
+      } else {
+        const feet = Number(heightFtInput.value);
+        const inches = Number(heightInInput.value);
+        if (!Number.isFinite(feet) || feet < 0 || !Number.isFinite(inches) || inches < 0) {
+          result.className = 'result warn';
+          result.innerHTML = '<strong>Please enter a valid height in feet and inches.</strong>';
+          return;
+        }
+        weightKg = weightRaw * 0.45359237;
+        const totalInches = feet * 12 + inches;
+        if (totalInches <= 0) {
+          result.className = 'result warn';
+          result.innerHTML = '<strong>Height must be greater than zero.</strong>';
+          return;
+        }
+        heightM = totalInches * 0.0254;
+      }
+
+      const bmi = weightKg / (heightM * heightM);
+      const category = bmiCategory(bmi);
+      const minHealthy = 18.5 * heightM * heightM;
+      const maxHealthy = 24.9 * heightM * heightM;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>BMI: ${bmi.toFixed(1)} (${category})</strong>
+        <div class="small" style="margin-top:8px;">Healthy range for your height: ${minHealthy.toFixed(1)} kg to ${maxHealthy.toFixed(1)} kg</div>
+      `;
+    }
+
+    unitSystem.addEventListener('change', updateUnitFields);
+    document.getElementById('calculateBtn').addEventListener('click', calculateBmi);
+    updateUnitFields();
+    calculateBmi();
+  </script>
+</body>
+</html>

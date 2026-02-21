@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Calculator (TDEE) - HealthKit</title>
+  <meta name="description" content="Estimate maintenance calories with age, sex, height, weight, and activity level using the Mifflin-St Jeor equation.">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/healthkit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HealthKit Calorie Calculator",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "url": "https://devtoolbox.dedyn.io/healthkit/calorie-calculator.html"
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/healthkit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>HealthKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/healthkit/">Home</a>
+        <a href="/healthkit/bmi-calculator.html">BMI</a>
+        <a href="/healthkit/macro-calculator.html">Macros</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Daily Calorie Needs Calculator</h1>
+        <p>Uses the Mifflin-St Jeor equation to estimate BMR, then applies activity level for TDEE.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="sex">Sex</label>
+            <select id="sex">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label for="age">Age</label>
+            <input id="age" type="number" min="10" max="99" step="1" value="30">
+          </div>
+          <div>
+            <label for="weightKg">Weight (kg)</label>
+            <input id="weightKg" type="number" min="25" max="350" step="0.1" value="70">
+          </div>
+          <div>
+            <label for="heightCm">Height (cm)</label>
+            <input id="heightCm" type="number" min="120" max="230" step="0.1" value="175">
+          </div>
+          <div>
+            <label for="activity">Activity level</label>
+            <select id="activity">
+              <option value="1.2">Sedentary (little exercise)</option>
+              <option value="1.375">Light (1-3 days/week)</option>
+              <option value="1.55" selected>Moderate (3-5 days/week)</option>
+              <option value="1.725">Very active (6-7 days/week)</option>
+              <option value="1.9">Athlete / hard training</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate Calories</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your result will appear here.</strong>
+        </div>
+
+        <p class="footnote">A practical range is usually maintenance +/- 250 to 500 kcal depending on your goal.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sexInput = document.getElementById('sex');
+    const ageInput = document.getElementById('age');
+    const weightInput = document.getElementById('weightKg');
+    const heightInput = document.getElementById('heightCm');
+    const activityInput = document.getElementById('activity');
+    const result = document.getElementById('result');
+
+    function calculateCalories() {
+      const sex = sexInput.value;
+      const age = Number(ageInput.value);
+      const weight = Number(weightInput.value);
+      const height = Number(heightInput.value);
+      const activity = Number(activityInput.value);
+
+      if (![age, weight, height, activity].every((n) => Number.isFinite(n) && n > 0)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter valid inputs for all fields.</strong>';
+        return;
+      }
+
+      let bmr = 10 * weight + 6.25 * height - 5 * age;
+      bmr += sex === 'male' ? 5 : -161;
+
+      const tdee = bmr * activity;
+      const cut = tdee - 400;
+      const leanCut = tdee - 250;
+      const leanBulk = tdee + 250;
+      const bulk = tdee + 400;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Maintenance (TDEE): ${Math.round(tdee)} kcal/day</strong>
+        <div class="small" style="margin-top:8px;">BMR: ${Math.round(bmr)} kcal/day</div>
+        <div class="small">Fat loss targets: ${Math.round(cut)} to ${Math.round(leanCut)} kcal/day</div>
+        <div class="small">Muscle gain targets: ${Math.round(leanBulk)} to ${Math.round(bulk)} kcal/day</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateCalories);
+    calculateCalories();
+  </script>
+</body>
+</html>
