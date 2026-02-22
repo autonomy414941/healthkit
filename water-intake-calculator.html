@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Intake Calculator - HealthKit</title>
+  <meta name="description" content="Estimate daily water intake from body weight, activity, and climate. Get hydration targets in liters, cups, and 500 ml bottles.">
+  <meta name="keywords" content="water intake calculator, hydration calculator, daily water goal, how much water should I drink">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/water-intake-calculator.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Water Intake Calculator - HealthKit">
+  <meta property="og:description" content="Estimate a practical hydration target using weight, activity minutes, and climate.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/water-intake-calculator.html">
+  <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Water Intake Calculator - HealthKit">
+  <meta name="twitter:description" content="Estimate a practical hydration target using weight, activity minutes, and climate.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/healthkit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HealthKit Water Intake Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/healthkit/water-intake-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "HealthKit",
+            "item": "https://devtoolbox.dedyn.io/healthkit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Water Intake Calculator",
+            "item": "https://devtoolbox.dedyn.io/healthkit/water-intake-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is this hydration target calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The estimate starts with body weight and adds water needs for activity and hotter climates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does coffee count toward hydration?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many beverages contribute to fluid intake, but plain water is usually the easiest baseline for tracking."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this medical advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool gives educational estimates and is not a substitute for medical guidance."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/healthkit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>HealthKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/healthkit/">Home</a>
+        <a href="/healthkit/bmi-calculator.html">BMI</a>
+        <a href="/healthkit/calorie-calculator.html">Calories</a>
+        <a href="/healthkit/macro-calculator.html">Macros</a>
+        <a href="/sleepkit/?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-water-nav">SleepKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Water Intake Calculator <span class="badge">Hydration target</span></h1>
+        <p>Estimate your daily fluid target based on body weight, exercise minutes, and climate.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="unit">Weight unit</label>
+            <select id="unit">
+              <option value="kg" selected>Kilograms (kg)</option>
+              <option value="lb">Pounds (lb)</option>
+            </select>
+          </div>
+          <div>
+            <label for="weight">Body weight</label>
+            <input id="weight" type="number" min="20" max="700" step="0.1" value="70">
+          </div>
+          <div>
+            <label for="activityMinutes">Daily exercise (minutes)</label>
+            <input id="activityMinutes" type="number" min="0" max="360" step="1" value="30">
+          </div>
+          <div>
+            <label for="climate">Climate / temperature exposure</label>
+            <select id="climate">
+              <option value="cool">Cool or mostly indoors</option>
+              <option value="warm" selected>Warm / moderate heat</option>
+              <option value="hot">Hot / high sweat conditions</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate Water Target</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your hydration target will appear here.</strong>
+        </div>
+
+        <p class="footnote">Hydration needs vary by health conditions, medications, and sweat rate. Adjust with personal experience and clinical advice where needed.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Water Intake FAQ</h3>
+        <p><strong>How many liters should most adults drink?</strong><br>Needs vary, but many adults land around 2 to 3.5 liters per day depending on size, activity, and climate.</p>
+        <p><strong>Should I drink more on workout days?</strong><br>Yes. Heavy training and sweating usually increase fluid needs beyond your baseline.</p>
+        <p><strong>What if I have kidney, heart, or endocrine conditions?</strong><br>Follow your clinician's guidance, because fluid recommendations may differ from general formulas.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Pair Hydration With Sleep</h3>
+        <p>Use <a href="/sleepkit/sleep-debt-calculator.html?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-water-related">SleepKit Sleep Debt Calculator</a> to plan recovery nights when sleep has been short during demanding training weeks.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const unitInput = document.getElementById('unit');
+    const weightInput = document.getElementById('weight');
+    const activityInput = document.getElementById('activityMinutes');
+    const climateInput = document.getElementById('climate');
+    const result = document.getElementById('result');
+
+    function roundTo(value, decimals) {
+      const scale = 10 ** decimals;
+      return Math.round(value * scale) / scale;
+    }
+
+    function calculateWaterTarget() {
+      const unit = unitInput.value;
+      const weightRaw = Number(weightInput.value);
+      const activityMinutes = Number(activityInput.value);
+      const climate = climateInput.value;
+
+      if (!Number.isFinite(weightRaw) || weightRaw <= 0) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter a valid body weight.</strong>';
+        return;
+      }
+
+      if (!Number.isFinite(activityMinutes) || activityMinutes < 0 || activityMinutes > 360) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Exercise minutes should be between 0 and 360.</strong>';
+        return;
+      }
+
+      const weightKg = unit === 'kg' ? weightRaw : weightRaw * 0.45359237;
+      if (weightKg < 20 || weightKg > 320) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please use a realistic weight value.</strong>';
+        return;
+      }
+
+      const baseMl = weightKg * 35;
+      const activityMl = (activityMinutes / 30) * 350;
+      const climateMl = climate === 'hot' ? 550 : (climate === 'warm' ? 250 : 0);
+
+      const totalMl = baseMl + activityMl + climateMl;
+      const liters = totalMl / 1000;
+      const cups = totalMl / 240;
+      const bottles500 = totalMl / 500;
+      const rangeLow = liters * 0.9;
+      const rangeHigh = liters * 1.1;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Estimated daily target: ${roundTo(liters, 2)} L</strong>
+        <div class="small" style="margin-top:8px;">Practical range: ${roundTo(rangeLow, 2)} L to ${roundTo(rangeHigh, 2)} L</div>
+        <div class="small">Equivalent to about ${Math.round(cups)} cups or ${roundTo(bottles500, 1)} x 500 ml bottles</div>
+        <div class="small">Formula breakdown: baseline ${Math.round(baseMl)} ml + activity ${Math.round(activityMl)} ml + climate ${Math.round(climateMl)} ml</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateWaterTarget);
+    calculateWaterTarget();
+  </script>
+</body>
+</html>
