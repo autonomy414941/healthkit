@@ -69,6 +69,7 @@ a:hover {
   display: flex;
   gap: 14px;
   font-size: 0.95rem;
+  flex-wrap: wrap;
 }
 
 .panel {
