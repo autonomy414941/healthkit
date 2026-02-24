@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protein Calculator (Daily Grams) - HealthKit</title>
+  <meta name="description" content="Estimate daily protein grams by body weight and goal. Free protein calculator for fat loss, maintenance, muscle gain, and endurance.">
+  <meta name="keywords" content="protein calculator, protein intake calculator, grams of protein per day, protein per kg">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/healthkit/protein-calculator.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Protein Calculator (Daily Grams) - HealthKit">
+  <meta property="og:description" content="Calculate a practical daily protein target using body weight, goal, and activity level.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/healthkit/protein-calculator.html">
+  <meta property="og:site_name" content="HealthKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Protein Calculator (Daily Grams) - HealthKit">
+  <meta name="twitter:description" content="Calculate daily protein grams based on weight, goal, and activity.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/healthkit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HealthKit Protein Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/healthkit/protein-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "HealthKit",
+            "item": "https://devtoolbox.dedyn.io/healthkit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Protein Calculator",
+            "item": "https://devtoolbox.dedyn.io/healthkit/protein-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much protein should I eat per day?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A common range is about 1.2 to 2.2 grams per kilogram of body weight, depending on your goal, activity, and training load."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is higher protein helpful during fat loss?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many people use higher protein intake during fat loss to support satiety and muscle retention."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this replace nutrition advice from a clinician?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This calculator provides general estimates and is not medical advice."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/healthkit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>HealthKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/healthkit/">Home</a>
+        <a href="/healthkit/bmi-calculator.html">BMI</a>
+        <a href="/healthkit/calorie-calculator.html">Calories</a>
+        <a href="/healthkit/macro-calculator.html">Macros</a>
+        <a href="/healthkit/water-intake-calculator.html">Hydration</a>
+        <a href="/kits/">All Kits</a>
+        <a href="/sleepkit/?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-protein-nav">SleepKit</a>
+        <a href="/focuskit/?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-protein-nav-focus">FocusKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Protein Calculator <span class="badge">Daily grams</span></h1>
+        <p>Estimate a realistic protein target from body weight, goal, and activity level.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="unit">Weight unit</label>
+            <select id="unit">
+              <option value="kg" selected>Kilograms (kg)</option>
+              <option value="lb">Pounds (lb)</option>
+            </select>
+          </div>
+          <div>
+            <label for="weight">Body weight</label>
+            <input id="weight" type="number" min="20" max="700" step="0.1" value="70">
+          </div>
+          <div>
+            <label for="goal">Primary goal</label>
+            <select id="goal">
+              <option value="maintenance">Maintenance</option>
+              <option value="fat-loss">Fat loss</option>
+              <option value="muscle-gain" selected>Muscle gain</option>
+              <option value="endurance">Endurance</option>
+            </select>
+          </div>
+          <div>
+            <label for="activity">Training activity</label>
+            <select id="activity">
+              <option value="low">Low (0-2 sessions/week)</option>
+              <option value="moderate" selected>Moderate (3-5 sessions/week)</option>
+              <option value="high">High (6+ sessions/week)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate Protein Target</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your protein target will appear here.</strong>
+        </div>
+
+        <p class="footnote">This calculator gives educational estimates. If you have kidney, liver, or metabolic conditions, follow your clinician's advice.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Protein Calculator FAQ</h3>
+        <p><strong>Should protein be based on body weight?</strong><br>Yes. Most practical formulas set protein grams by body weight and then adjust by training goal.</p>
+        <p><strong>How many meals should I split protein across?</strong><br>A common setup is 3 to 5 meals per day with roughly even protein distribution.</p>
+        <p><strong>Do I still need calorie targets?</strong><br>Yes. Protein is one part of nutrition planning. Pair this with calorie and macro targets for full planning.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Next Step: Convert Protein Into Full Macros</h3>
+        <p>After setting protein grams, use the <a href="/healthkit/macro-calculator.html">Macro Calculator</a> to distribute carbs and fats, and confirm your calorie direction with the <a href="/healthkit/calorie-calculator.html">Calorie Calculator</a>. For recovery planning, add <a href="/sleepkit/wake-time-calculator.html?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-protein-related">SleepKit Wake Time Calculator</a> and block prep windows using <a href="/focuskit/time-block-calculator.html?utm_source=healthkit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=healthkit-protein-related-focus">FocusKit Time Block Calculator</a>.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const unitInput = document.getElementById('unit');
+    const weightInput = document.getElementById('weight');
+    const goalInput = document.getElementById('goal');
+    const activityInput = document.getElementById('activity');
+    const result = document.getElementById('result');
+
+    function toKg(value, unit) {
+      return unit === 'kg' ? value : value * 0.45359237;
+    }
+
+    function round(value, decimals) {
+      const scale = 10 ** decimals;
+      return Math.round(value * scale) / scale;
+    }
+
+    function activityAdjustment(activity) {
+      if (activity === 'high') {
+        return 0.1;
+      }
+      if (activity === 'low') {
+        return -0.1;
+      }
+      return 0;
+    }
+
+    function goalRange(goal) {
+      switch (goal) {
+        case 'fat-loss':
+          return { low: 1.6, high: 2.2, label: 'Fat loss' };
+        case 'muscle-gain':
+          return { low: 1.6, high: 2.4, label: 'Muscle gain' };
+        case 'endurance':
+          return { low: 1.2, high: 1.8, label: 'Endurance' };
+        case 'maintenance':
+        default:
+          return { low: 1.2, high: 1.6, label: 'Maintenance' };
+      }
+    }
+
+    function calculateProtein() {
+      const unit = unitInput.value;
+      const weightRaw = Number(weightInput.value);
+      const goal = goalInput.value;
+      const activity = activityInput.value;
+
+      if (!Number.isFinite(weightRaw) || weightRaw <= 0) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter a valid body weight.</strong>';
+        return;
+      }
+
+      const weightKg = toKg(weightRaw, unit);
+      if (weightKg < 20 || weightKg > 320) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please use a realistic body weight.</strong>';
+        return;
+      }
+
+      const range = goalRange(goal);
+      const adjustment = activityAdjustment(activity);
+      const lowFactor = Math.max(0.8, range.low + adjustment);
+      const highFactor = Math.max(lowFactor + 0.2, range.high + adjustment);
+
+      const proteinLow = weightKg * lowFactor;
+      const proteinHigh = weightKg * highFactor;
+      const midpoint = (proteinLow + proteinHigh) / 2;
+      const perMeal4 = midpoint / 4;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>${range.label} target: ${Math.round(proteinLow)} to ${Math.round(proteinHigh)} g/day</strong>
+        <div class="small" style="margin-top:8px;">Range used: ${round(lowFactor, 1)} to ${round(highFactor, 1)} g per kg body weight</div>
+        <div class="small">Midpoint target: ${Math.round(midpoint)} g/day (about ${Math.round(perMeal4)} g across 4 meals)</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateProtein);
+    calculateProtein();
+  </script>
+</body>
+</html>
